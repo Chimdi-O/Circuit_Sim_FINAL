@@ -16,4 +16,4 @@ def BuildMatrix(Circuit,mode):
 
     for component in Circuit.components: 
          matrix = component.stamp(matrix,Circuit.node_map,extra_unknown_map)
-        
+            #test
