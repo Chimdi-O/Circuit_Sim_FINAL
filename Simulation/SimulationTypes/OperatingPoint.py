@@ -1,10 +1,19 @@
-
+from Simulation.MatrixBuilder import buildMatrix
+from Simulation.Solver import matrixSolver
 
 
 class OperatingPoint(): 
-    def __init__(self,arguments,circuit): 
-        self.arguments = arguments
+    def __init__(self,circuit): 
         self.circuit = circuit 
+
+    def run(self): 
+        matrix = buildMatrix(self.circuit,"op")
+        solution = matrixSolver(matrix)
+        print("hello!")
+        print(matrixSolver(matrix))
+        for i in solution: 
+            print(i)
+
      
 
     

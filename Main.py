@@ -1,13 +1,14 @@
 from Interpreter import Interpreter
 
 
-file = "Circuit_Sim_FINAL/SpiceTest.txt"
+file = "SpiceTest.txt"
 
 
 interpreter = Interpreter()
-interpreter.parsefile(file)
+interpreter.parseFile(file)
 
 print(interpreter.circuit)
+interpreter.simulation_manager.runDirectives()
 
 
 

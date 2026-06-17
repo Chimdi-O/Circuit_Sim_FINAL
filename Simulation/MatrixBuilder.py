@@ -1,5 +1,5 @@
 
-def BuildMatrix(Circuit,mode): 
+def buildMatrix(Circuit,mode): 
     extra_unknown_map = {} 
 
     extra_unknowns = ["V"]
@@ -14,7 +14,7 @@ def BuildMatrix(Circuit,mode):
     n = len(Circuit.node_map)+len(extra_unknown_map)
     matrix_a = [[0 for _ in range(n)] for _ in range(n)]
     matrix_b = [0]*n
-
+  
     for component in Circuit.components: 
          matrix = component.stamp(matrix_a,matrix_b,Circuit.node_map,extra_unknown_map,mode)
     

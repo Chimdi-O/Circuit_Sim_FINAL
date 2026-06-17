@@ -2,6 +2,7 @@
 #NOTE if there is a row of zeros that is a singular matrix and it cannot be solved!!!!
 
 def matrixSolver(matrix):
+    print(matrix)
 
     #these two identify the index of the pivot 
     current_column = 0

@@ -1,5 +1,5 @@
 from Simulation.SimulationTypes.OperatingPoint import OperatingPoint 
-from Simulation.SimulationTypes.Transient import Transient 
+#from Simulation.SimulationTypes.Transient import Transient 
 
 class SimulationManager(): 
     def __init__(self,circuit): 
@@ -8,17 +8,19 @@ class SimulationManager():
 
     def addDirective(self,directive,arguments): 
 
-        if directive[0] == "op":
-            self.directives.append(OperatingPoint(arguments,self.circuit))
+        if directive == "op":
+            self.directives.append(OperatingPoint(self.circuit))
+            
         
         if directive[0] == "tran": 
-            self.directives.append(Transient(arguments,self.circuit))
+            #self.directives.append(Transient(arguments,self.circuit))
+            pass
 
     def runDirectives(self): 
         for directive in self.directives: 
             self.runDirective(directive)
     
-    def runDirective(directive): 
+    def runDirective(self,directive): 
         directive.run() 
         
 

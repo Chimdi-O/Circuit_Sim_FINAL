@@ -1,7 +1,6 @@
-R5 N021 0 20k
-R6 N018 0 11k
-R7 N001 N018 18k
-C3 N013 0 0.1u
-R8 N013 N006 20k
-R9 N002 N003 20k
-C5 N017 N016 0.1u
+.op
+R3 Net-_R3-Pad1_ 0 500
+R2 Net-_R1-Pad2_ 0 2k
+V1 Net-_R1-Pad1_ 0 4.5 
+R4 Net-_R1-Pad1_ Net-_R3-Pad1_ 1.1k
+R1 Net-_R1-Pad1_ Net-_R1-Pad2_ 5k

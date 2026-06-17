@@ -10,7 +10,7 @@ class Circuit():
         for i in comp.nodes: 
             if i != "0" and i not in self.node_map: 
                 if len(self.node_map) == 0: 
-                    self.node_map[i] = 1 
+                    self.node_map[i] = 0 
                 else: 
                     self.node_map[i] = len(self.node_map) 
 
