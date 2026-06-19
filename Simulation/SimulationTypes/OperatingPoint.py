@@ -9,8 +9,6 @@ class OperatingPoint():
     def run(self): 
         matrix = buildMatrix(self.circuit,"op")
         solution = matrixSolver(matrix)
-        print("hello!")
-        print(matrixSolver(matrix))
         for i in solution: 
             print(i)
 

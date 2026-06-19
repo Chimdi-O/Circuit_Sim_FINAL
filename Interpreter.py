@@ -30,8 +30,6 @@ class Interpreter():
 
         elif line.startswith("."): 
             tokens = line[1:].split() 
-            print("fire!!")
-            print(tokens)
             directive = self.parseDirectives(tokens)
             self.directive = directive
 
