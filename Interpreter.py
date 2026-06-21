@@ -1,6 +1,9 @@
 from Circuit.Circuit import Circuit
 from Circuit.Components import Resistor, Inductor, Capacitor, VoltageSource
 from Simulation.SimulationManager import SimulationManager
+import sys 
+from Simulation.SimulationTypes.OperatingPoint import OperatingPoint 
+#from Simulation.SimulationTypes.Transient import Transient 
 
 
 class Interpreter(): 
@@ -9,21 +12,22 @@ class Interpreter():
         
         self.circuit = Circuit()
         self.simulation_manager = SimulationManager(self.circuit) 
-
+        self.component_names = [] 
+        self.current_line = 1
+        
     def parseFile(self,filepath): 
+        self.current_line = 1
         with open(filepath) as f: 
+            next(f) #spice skips the first line of the file
+            self.current_line += 1
+
             for line in f: 
                 self.parseLine(line)
-
-
-    def parseString(self,lines): 
-        lines = lines.split("\n")
-
-        for line in lines: 
-            self.parseLine(line)
+                self.current_line += 1
 
     def parseLine(self,line): 
         line = line.strip()
+        
         
         if not line or line.startswith("*"): 
             return 
@@ -40,21 +44,35 @@ class Interpreter():
 
 
     def parseDirectives(self,tokens): 
-        directive = tokens[0]
+        directive = tokens[0].lower()
         arguments = tokens[1:]
 
-        self.simulation_manager.addDirective(directive,arguments)
+        if directive == "op": 
+            mode  = OperatingPoint(self.circuit)
+            self.simulation_manager.directives.append(mode)
+            return
 
-        
+        elif directive == "tran": 
+            return
 
+        else: 
+            print(f"Error: Unknown directive {directive} on line {self.current_line}")
+            sys.exit() 
 
+            
 
     def parseComponent(self,tokens): 
         
-        name = tokens[0]
+        name = tokens[0].upper() 
         # some type of if statement when we have components with different number of nodes 
         nodes = tokens[1:3]
         value = tokens[3]
+
+        if name  in self.component_names: 
+            print(f"Error: Duplicate component name {name} on line {self.current_line}")
+            sys.exit() 
+
+        self.component_names.append(name)
 
         if name.startswith("R"): 
             return Resistor(name,nodes,value)
@@ -67,6 +85,11 @@ class Interpreter():
         
         elif name.startswith("V"): 
             return VoltageSource(name,nodes,value)
+        
+        else: 
+            print(f"Error: Unknown component type {name} on line {self.current_line}")
+            sys.exit() 
+
     
 
 
