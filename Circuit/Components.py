@@ -1,11 +1,11 @@
-from Utils import parseUnits
+
 
 class Component(): 
-    def __init__(self,name,nodes,str_value): 
+    def __init__(self,name,nodes,str_value,num_value): 
         self.name = name 
         self.nodes = nodes 
         self.str_value = str_value
-        self.num_value = parseUnits(str_value)
+        self.num_value = num_value
     
     def __repr__(self): 
         node_str = " ".join(self.nodes)
