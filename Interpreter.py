@@ -116,8 +116,8 @@ class Interpreter():
             "p":1e-12,
             "f":1e-15}
         
-        if unit not in unit_table: 
-            print(f"Error: Invalid unit {unit} on line {self.current_line}")
+        if unit.lower() not in unit_table: 
+            print(f"Error: Invalid unit {unit.lower} on line {self.current_line}")
             sys.exit()
 
         return float(num) * unit_table[unit.lower()]

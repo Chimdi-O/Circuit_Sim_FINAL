@@ -1,8 +1,9 @@
 
 .op
 
-r3 Net-_R3-Pad1_ 0 500
-R2 Net-_R1-Pad2_ 0 2k
-V1 Net-_R1-Pad1_ 0 4.5 
-R4 Net-_R1-Pad1_ Net-_R3-Pad1_ 1.1k
-R1 Net-_R1-Pad1_ Net-_R1-Pad2_ 5k
+
+V1 1 0 4.5 
+R4 1 2 10k
+r3 2 0 5435
+
+R1 1 3 5k
