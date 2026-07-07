@@ -4,6 +4,9 @@ def buildMatrix(Circuit,mode):
 
     extra_unknowns = ["V"]
 
+
+
+
     if mode == "op": 
           extra_unknowns.append("L")
 
@@ -13,7 +16,7 @@ def buildMatrix(Circuit,mode):
 
     n = len(Circuit.node_map)+len(Circuit.extra_unknown_map)
     matrix_a = [[0 for _ in range(n)] for _ in range(n)]
-    matrix_b = [[0] for _ in range(n)]
+    matrix_b = [0 for _ in range(n)]
   
     for component in Circuit.components: 
          matrix = component.stamp(matrix_a,matrix_b,Circuit.node_map,Circuit.extra_unknown_map,mode)
@@ -22,13 +25,13 @@ def buildMatrix(Circuit,mode):
     aug_matrix = matrix_a
 
     for i in range(n): 
-         aug_matrix[i].append(matrix_b[i][0])
+         aug_matrix[i].append(matrix_b[i])
 
     return aug_matrix
             
 
 
-
+#there are only comments here bc the rest of the program is straightforward and self explanatory
 #NOTE if there is a row of zeros that is a singular matrix and it cannot be solved!!!!
 
 def matrixSolver(matrix):
@@ -42,7 +45,6 @@ def matrixSolver(matrix):
     while current_column < len(matrix[0])-1: # why?? 
 
         #This chooses the first non zero item in the current column as the pivot and moves it row its a part of to the current row
-       
         for a in range(current_row,len(matrix)): 
             if matrix[a][current_column] != 0: 
                 temp = matrix[a]

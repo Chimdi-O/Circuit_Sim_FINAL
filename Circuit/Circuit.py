@@ -8,8 +8,7 @@ class Circuit():
         self.extra_unknown_map = {}
         self.reversed_node_map = {}
         self.voltage_dict = {} 
-        self.current_dict = {} 
-        self.power_dict = {} 
+   
        
     def addComponent(self,comp): 
         self.components.append(comp) 
@@ -34,16 +33,18 @@ class Circuit():
     def parseResultsMatrix(self,results_matrix,mode): 
         # voltage
 
-        for i in range(len(results_matrix)): 
+        for i in range(len(self.node_map)): 
             node = self.reversed_node_map[i]
             value = round(results_matrix[i][-1],3)
             self.voltage_dict[node] = value 
 
         # Currents 
         for i in self.components: 
+            i.calcVoltage(self.voltage_dict)
             i.calcCurrent(results_matrix,self.node_map,self.extra_unknown_map,mode)
+            i.calcPower() 
 
-        # Power
+        
         
     def printValues(self): 
 
@@ -52,5 +53,10 @@ class Circuit():
             print(f"{f"V({node})":<10} :       {value}V")
         
         for component in self.components: 
-            value = SI_prefix(component.current)
-            print(f"{f"I({component.name})":<10} :       {value}A")
+            current = SI_prefix(component.current)
+             
+            print(f"{f"I({component.name})":<10} :       {current}A")
+
+        for component in self.components: 
+            value = SI_prefix(component.power)
+            print(f"{f"P({component.name})":<10} :       {value}W")
